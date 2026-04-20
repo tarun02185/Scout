@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: scout-api
+    runtime: python
+    buildCommand: bash build.sh
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GOOGLE_API_KEY
+        sync: false
+    plan: free

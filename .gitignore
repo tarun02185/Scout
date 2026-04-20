@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+venv/
+.venv/
+*.egg-info/
+dist/
+build/
+
+# Environment (NEVER commit real keys)
+.env
+backend/.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Data stores (generated at runtime)
+chroma_store/
+sessions.db
+*.db
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temp files
+tmp/
+temp/
+
+# Node
+node_modules/
+frontend/node_modules/
+frontend/dist/
+
+# Frontend build cache
+.cache/
+.pytest_cache/
+
+# Hackathon PDF files (not part of source code)
+*.pdf

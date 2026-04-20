@@ -1,0 +1,88 @@
+# Metric Dictionary — ensures consistent definitions across all queries.
+# The system references this before generating any SQL or analysis.
+# Add your own metrics here based on your dataset.
+
+metrics:
+  revenue:
+    display_name: "Revenue"
+    description: "Total income from sales, calculated as quantity × unit price"
+    formula: "SUM(quantity * unit_price)"
+    aliases: ["sales", "income", "total sales", "turnover", "earnings"]
+    unit: "currency"
+    direction: "higher_is_better"
+
+  profit:
+    display_name: "Profit"
+    description: "Revenue minus costs"
+    formula: "SUM(profit)"
+    aliases: ["earnings", "net income", "margin", "net profit"]
+    unit: "currency"
+    direction: "higher_is_better"
+
+  order_count:
+    display_name: "Number of Orders"
+    description: "Total number of distinct orders"
+    formula: "COUNT(DISTINCT order_id)"
+    aliases: ["orders", "transactions", "order volume", "total orders"]
+    unit: "count"
+    direction: "higher_is_better"
+
+  average_order_value:
+    display_name: "Average Order Value"
+    description: "Average revenue per order"
+    formula: "SUM(revenue) / COUNT(DISTINCT order_id)"
+    aliases: ["AOV", "avg order", "average transaction"]
+    unit: "currency"
+    direction: "higher_is_better"
+
+  customer_count:
+    display_name: "Number of Customers"
+    description: "Count of unique customers"
+    formula: "COUNT(DISTINCT customer_id)"
+    aliases: ["customers", "users", "unique customers", "active users"]
+    unit: "count"
+    direction: "higher_is_better"
+
+  discount_rate:
+    display_name: "Discount Rate"
+    description: "Average discount applied to orders"
+    formula: "AVG(discount)"
+    aliases: ["discount", "avg discount", "discount percentage"]
+    unit: "percentage"
+    direction: "neutral"
+
+# Time dimensions the system recognizes
+time_dimensions:
+  - "date"
+  - "order_date"
+  - "created_at"
+  - "timestamp"
+  - "month"
+  - "year"
+  - "quarter"
+  - "week"
+
+# Category dimensions for breakdowns
+category_dimensions:
+  - "region"
+  - "category"
+  - "sub_category"
+  - "segment"
+  - "product"
+  - "channel"
+  - "department"
+  - "city"
+  - "state"
+  - "country"
+
+# Ambiguous time phrases and their resolutions
+time_aliases:
+  "last month": "DATE_TRUNC('month', CURRENT_DATE - INTERVAL '1 month')"
+  "this month": "DATE_TRUNC('month', CURRENT_DATE)"
+  "last week": "DATE_TRUNC('week', CURRENT_DATE - INTERVAL '1 week')"
+  "this week": "DATE_TRUNC('week', CURRENT_DATE)"
+  "last year": "DATE_TRUNC('year', CURRENT_DATE - INTERVAL '1 year')"
+  "this year": "DATE_TRUNC('year', CURRENT_DATE)"
+  "last quarter": "DATE_TRUNC('quarter', CURRENT_DATE - INTERVAL '3 months')"
+  "yesterday": "CURRENT_DATE - INTERVAL '1 day'"
+  "recently": "CURRENT_DATE - INTERVAL '30 days'"
